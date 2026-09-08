@@ -1,6 +1,6 @@
 # Deep Crypt - Game Dev Project.
 
-> Un juego 2d de recoleccion de diamantes, donde hay enemigos y una tienda de mejoras.
+> Un juego 2d plataformero de recoleccion de diamantes, donde hay enemigos y una tienda de mejoras.
 
 ---
 
@@ -36,7 +36,7 @@ para el segundo cuatrimestre como: POO, estructura de datos y diccionari, herenc
 
 ### Probar la Demo
 Podés jugar la versión ejecutable directamente desde el navegador o descargando la build:
-👉 **[Enlace a tu juego en itch.io o GitHub Pages]**
+👉 *(Próximamente disponible en itch.io)*.
 
 ### Ejecutar desde Unity (Para Desarrolladores)
 1. Cloná este repositorio:
