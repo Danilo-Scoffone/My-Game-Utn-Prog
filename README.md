@@ -40,5 +40,6 @@ Podés jugar la versión ejecutable directamente desde el navegador o descargand
 
 ### Ejecutar desde Unity (Para Desarrolladores)
 1. Cloná este repositorio:
-   ```bash
-   git clone [https://github.com/Danilo-Scoffone/My-Game-Utn-Prog.git](https://github.com/Danilo-Scoffone/My-Game-Utn-Prog.git)
+  ```bash
+git clone https://github.com/Danilo-Scoffone/My-Game-Utn-Prog.git
+```
