@@ -11,9 +11,7 @@ para el segundo cuatrimestre como: POO, estructura de datos y diccionario, heren
 
 ## 📸 Demostración / Gameplay
 
-
-https://github.com/user-attachments/assets/f2ce1997-ccf0-4767-b940-2983e74b4682
-
+https://github.com/user-attachments/assets/b8e29280-d75b-4d39-b8a0-b220a057d25e
 
 
 ## ⚙️ Características Técnicas y Arquitectura
