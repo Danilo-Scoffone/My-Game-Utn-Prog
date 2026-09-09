@@ -11,9 +11,9 @@
 
 ## 🎮 Descripción del Proyecto
 
-Este Proyecto fue realizado para el primer y segundo cuatrimestre de la Tecnicatura Tecnicatura Universitaria en Desarrollo 
+Este Proyecto fue realizado para el primer y segundo cuatrimestre de la Tecnicatura Universitaria en Desarrollo 
 y Producción de Videojuegos en la UTN. La cual aplique conceptos de programacion basicos y luego fuimos agregando mas conceptos
-para el segundo cuatrimestre como: POO, estructura de datos y diccionari, herencia y demas.
+para el segundo cuatrimestre como: POO, estructura de datos y diccionario, herencia y demas.
 ---
 
 ## ⚙️ Características Técnicas y Arquitectura
