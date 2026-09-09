@@ -6,9 +6,8 @@
 
 ## 📸 Demostración / Gameplay
 
-![Gameplay del juego](https://vía.placeholder.com/800x450?text=Agrega+aqui+un+GIF+o+captura+del+juego)
+<img width="800" height="450" alt="GIfParaGIt-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/c76a7ba9-dcb7-4748-9f0b-cecd0016f64d" />
 
----
 
 ## 🎮 Descripción del Proyecto
 
