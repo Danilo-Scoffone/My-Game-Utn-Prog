@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1192933916484138017}
   - component: {fileID: 5440820095071389291}
   - component: {fileID: -3142018254326698170}
+  - component: {fileID: 99887915849848109}
   m_Layer: 0
   m_Name: Diamond_0
   m_TagString: Diamond
@@ -166,3 +167,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!114 &99887915849848109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614102464464434941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ba1328adcc09642b0fd93da42529f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Diamont
+  textDiamonds: {fileID: 7807570277935217142, guid: deb8643881136bd47b972f278eaa1401, type: 3}

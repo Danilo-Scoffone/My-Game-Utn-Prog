@@ -26,18 +26,22 @@ public class Movement : MonoBehaviour
     private SpriteRenderer sprite;
 
     [Header("Sprites")]
+
     [SerializeField] private TextMeshProUGUI textPotions;
-    [SerializeField] private TextMeshProUGUI textDiamonds;
     [SerializeField] private Image healt;
 
     [Header("Movement")]
     private float horizontal;
-    [SerializeField] private int speed;
+    [SerializeField] private int _speed=4;
+    public int speed {get => _speed; set=> _speed = value;}
     [SerializeField] private int jumpForce;
-    [SerializeField] private int damage;
-    [SerializeField] private float maxHealt;
+    [SerializeField] private int _damage=25;
+    public int damage {get=> _damage; set=> _damage = value;}
+    [SerializeField] private float _maxHealth=100f;
+    public float maxHealth {get=> _maxHealth; set=> _maxHealth = value;}
     [SerializeField] private int Diamonds = 0;
-    [SerializeField] private int healtPotions=0;
+    public int _diamonds {get => Diamonds; set => Diamonds = value;}
+    
     [Header("Layers")]
     [SerializeField] private LayerMask floor;
     [SerializeField] private LayerMask enemy;
@@ -46,9 +50,15 @@ public class Movement : MonoBehaviour
     private bool alive = true;
     public float timeAttacks = 0.3f;
     private float cooldownAttack= 0f;
+    
+    protected int _healtPotions;
+    public int healtPotions { get=> _healtPotions; set=> _healtPotions=value; }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
+        
         //Spawn
         GameObject spawn = GameObject.FindWithTag("SpawnPoint");
         if(spawn != null)
@@ -58,7 +68,26 @@ public class Movement : MonoBehaviour
         }
         anim= GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        sprite= GetComponent<SpriteRenderer>(); 
+        sprite= GetComponent<SpriteRenderer>();
+        if (GameManager.Instance != null)
+        {
+            _diamonds = GameManager.Instance.diamonds;
+            healtPotions = GameManager.Instance.healthPotions;
+            maxHealth = GameManager.Instance.savedHealth;
+            _speed = GameManager.Instance.savedSpeed;
+            
+        }
+    }
+    public void SaveStatsToManager()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.diamonds = _diamonds;
+            GameManager.Instance.healthPotions = healtPotions;
+            GameManager.Instance.savedHealth = maxHealth;
+            GameManager.Instance.savedSpeed = speed;
+            GameManager.Instance.savedDamage = damage;
+        }
     }
 
     // Update is called once per frame
@@ -94,10 +123,10 @@ public class Movement : MonoBehaviour
             Collider2D enemys= Physics2D.OverlapCircle(transform.position, 1.5f, enemy);
             if (enemys != null)
             {
-                EnemyMovement EnemyScript= enemys.GetComponent<EnemyMovement>();
-                if (EnemyScript!=null)
+                ITakeDamage takeDamage=enemys.GetComponentInChildren<ITakeDamage>();
+                if (takeDamage!=null)
                 {
-                    EnemyScript.TakeDamage(damage);
+                    takeDamage.TakeDamage(damage);
                 }
                 
             }
@@ -105,15 +134,15 @@ public class Movement : MonoBehaviour
         }
         if (healtPotions>0 && Input.GetKeyDown(KeyCode.K))
         {
-            maxHealt += 30;
-            healt.fillAmount = maxHealt / 100f;
+            _maxHealth += 30;
+            healt.fillAmount = _maxHealth / 100f;
             healtPotions--;
             textPotions.text = healtPotions.ToString();
         }
         if (openStore && Input.GetKeyDown(KeyCode.E))
         {
             canvasStore.SetActive(true);
-            Time.timeScale = 0f;
+            
             
         }
     }
@@ -178,9 +207,9 @@ public class Movement : MonoBehaviour
 
     public void TakeDamage(int Damage)
     {
-        maxHealt -= Damage;
-        healt.fillAmount = maxHealt / 100;
-        if (maxHealt <= 0)
+        _maxHealth -= Damage;
+        healt.fillAmount = _maxHealth / 100;
+        if (_maxHealth <= 0)
         { 
             Death(1.5f);
         }
@@ -196,46 +225,10 @@ public class Movement : MonoBehaviour
     {
         SceneManager.LoadScene("SceneDead");
     }
-    //Diamantes
+    
 
 
-    public int GetDiamonds()
-    {
-        return Diamonds;
-    }
-    public void SetDiamonds(int NewDiamonds)
-    {
-        Diamonds = NewDiamonds;
-    }
-
-    //Speed
-    public int GetSpeed()
-    {
-        return speed;
-    }
-    public void SetSpeed(int NewSpeed)
-    {
-        speed = NewSpeed;
-    }
-    //DAño
-    public int Getdamage()
-    {
-        return damage;
-    }
-    public void Setdamage(int Newdamage)
-    {
-        damage = Newdamage;
-    }
-
-    //vida
-    public float GetmaxHealt()
-    {
-        return maxHealt;
-    }
-    public void SetmaxHealt(float NewmaxHealt)
-    {
-        maxHealt = NewmaxHealt;
-    }
+    
    public GameObject GetPanelBuy()
     {
         return PanelBuy;
@@ -246,50 +239,18 @@ public class Movement : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("DeadZone"))
-        {
-            Death(1f);
-        }
-        if (collision.gameObject.CompareTag("Diamond"))
-        {
-            Destroy(collision.gameObject);
-            Diamonds ++;
-            textDiamonds.text = Diamonds.ToString();
-            
-        }
-        if (collision.gameObject.CompareTag("HealtPotion"))
-        {
-            Destroy(collision.gameObject);
-            healtPotions ++;
-            textPotions.text=healtPotions.ToString();
-            
-        }
+        IChangeScene ChangeScene = collision.gameObject.GetComponent<IChangeScene>();
+        if (ChangeScene!= null) { ChangeScene.Teleport();}
+        
+        ITakeObject TakeObject=collision.gameObject.GetComponent<ITakeObject>();
+        if (TakeObject != null) { TakeObject.TakeObject(); }
 
-        if (collision.gameObject.CompareTag("Store"))
-        {
-            SceneManager.LoadScene("Store");
-        }
-
-        if (collision.gameObject.CompareTag("NextLevel"))
-        {
-            SceneManager.LoadScene("Level 2");
-        }
-
-        if (collision.gameObject.CompareTag("PreviusLevel"))
-        {
-            SceneManager.LoadScene("SceneGame");
-        }
-        if (collision.gameObject.CompareTag("DoorEnd"))
-        {
-            SceneManager.LoadScene("SceneVictory");
-        }
+        
 
         if (collision.gameObject.CompareTag("CanvasStore") )
         {
-
             canvasE.SetActive(true);
             openStore=true;
-           
         }
        
     }
@@ -299,7 +260,6 @@ public class Movement : MonoBehaviour
         {
             canvasE.SetActive(false);
             
-         
         }
     }
 }

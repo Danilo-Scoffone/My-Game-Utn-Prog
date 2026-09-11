@@ -1,23 +1,16 @@
 using UnityEngine;
 
-public class Skeleton : EnemyMovement, IdropCoins
+public class Skeleton : EnemyMovement,ITakeDamage
 {
-    public bool alive => base.alive;
-
-    [Header("Prefab de Diamonds para soltar")]
-    [SerializeField] private GameObject diamonds;
-    private bool hasDropped = false; // Control para evitar soltar múltiples veces
-    public void DropCoins()
+    public void TakeDamage(int damage)
     {
-        if (!alive && !hasDropped)
+        currentHealth -= damage;
+        if (currentHealth <= 0)
         {
-            hasDropped = true;
-            Instantiate(diamonds, transform.position, Quaternion.identity);
+            alive = false;
+            anim.SetBool("Death", true);
+            Invoke("Die", 0.6f);
+            
         }
     }
-    protected override void OnDeath()
-    {
-        DropCoins();
-    }
-   
 }

@@ -2,8 +2,12 @@ using UnityEngine;
 using System.Collections.Generic; //Para usar diccionario 
 public class Store : MonoBehaviour
 {
-    [SerializeField] private int DiamonsStore;
-    [SerializeField] private int requiredDiamond=0;
+    
+    [SerializeField] private int requiredDiamond;
+
+   
+
+  
     private void Start()
     {
         
@@ -20,10 +24,7 @@ public class Store : MonoBehaviour
         Movement playerMovement = FindFirstObjectByType<Movement>();// Buscamos al jugador en la escena
         if (playerMovement != null)// si encuentra recibe los datos del pj
         {
-            DiamonsStore = playerMovement.GetDiamonds();
-            int damage = playerMovement.Getdamage();
-            float maxHelath = playerMovement.GetmaxHealt();
-            int speed = playerMovement.GetSpeed();
+            
             GameObject Panelbuy = playerMovement.GetPanelBuy();
             GameObject PanelPurchaseRejected = playerMovement.GetPanelPurchaseRejected();
             switch (ItemName) //vemos q item selecciono y su precio
@@ -38,27 +39,27 @@ public class Store : MonoBehaviour
                     requiredDiamond = itemStore["PowerUpSpeed"];
                     break;
             }
-            if (DiamonsStore >= requiredDiamond) // verificamos si tiene los suficientes diamantes 
+            if (playerMovement._diamonds >= requiredDiamond) // verificamos si tiene los suficientes diamantes 
             {
                 Panelbuy.SetActive(true);
                 Invoke("RemovePanel", 2f);
-                DiamonsStore -= requiredDiamond; //restamos los diamantes
-                playerMovement.SetDiamonds(DiamonsStore);// le mandamos al pj los diamantes restantes
+                playerMovement._diamonds -= requiredDiamond; //restamos los diamantes
+               
                 switch (ItemName) //vemos q item selecciono 
                 {
                     case "PowerUpSword":
-                        damage = Mathf.RoundToInt(damage * 1.25f);
-                        playerMovement.Setdamage(damage);
+                        playerMovement.damage = Mathf.RoundToInt(playerMovement.damage * 1.25f);
+                        
                         break;
                     case "PowerUpHealth":
-                        maxHelath = Mathf.RoundToInt(maxHelath * 1.50f);
-                        playerMovement.SetmaxHealt(maxHelath);
+                        playerMovement.maxHealth = Mathf.RoundToInt(playerMovement.maxHealth * 1.50f);
+                       
                         break;
                     case "PowerUpSpeed":
-                        speed = Mathf.RoundToInt(speed * 1.25f);
-                        playerMovement.SetSpeed(speed);
+                        playerMovement.speed = Mathf.RoundToInt(playerMovement.speed * 1.50f);
                         break;
                 }
+                
             }
             else
             {

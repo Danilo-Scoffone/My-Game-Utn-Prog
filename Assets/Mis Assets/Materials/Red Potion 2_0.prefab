@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3745142285841693395}
   - component: {fileID: 4350660912477054528}
   - component: {fileID: 7639933389517399169}
+  - component: {fileID: 1981559464235130431}
   m_Layer: 0
   m_Name: Red Potion 2_0
   m_TagString: HealtPotion
@@ -166,3 +167,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!114 &1981559464235130431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8445015192743850622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b089dcacfc8401419bae7a26f7820f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Potions
+  textPotions: {fileID: 0}

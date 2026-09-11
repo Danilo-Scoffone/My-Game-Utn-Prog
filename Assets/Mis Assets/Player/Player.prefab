@@ -156,6 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f090168a4a1fa53469ae08511181321b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
+  PanelBuy: {fileID: 0}
+  PanelPurchaseRejected: {fileID: 0}
   canvasE: {fileID: 0}
   canvasStore: {fileID: 0}
   storeUI: {fileID: 0}
@@ -163,10 +165,10 @@ MonoBehaviour:
   textPotions: {fileID: 0}
   textDiamonds: {fileID: 0}
   healt: {fileID: 0}
-  speed: 4
+  _speed: 4
   jumpForce: 5
-  damage: 20
-  maxHealt: 100
+  _damage: 25
+  _maxHealth: 100
   Diamonds: 0
   healtPotions: 0
   floor:

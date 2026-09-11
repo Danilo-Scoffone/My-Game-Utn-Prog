@@ -14,6 +14,7 @@ TagManager:
   - SpawnPoint
   - PreviusLevel
   - CanvasStore
+  - TextDiamonds
   layers:
   - Default
   - TransparentFX

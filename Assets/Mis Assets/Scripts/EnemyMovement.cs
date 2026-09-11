@@ -18,7 +18,7 @@ public class EnemyMovement : MonoBehaviour
     
     [Header("Estadísticas de Combate")]
     public int maxHealth = 100;
-    private int currentHealth;
+    protected int currentHealth;
     protected bool alive = true;
     [SerializeField] private int damageSkeleton;
     public float timeAttacks = 0.6f; 
@@ -62,17 +62,7 @@ public class EnemyMovement : MonoBehaviour
         rb.MovePosition(rb.position + movement * speed * Time.deltaTime);
     }
 
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            alive = false;
-            anim.SetBool("Death", true);
-            Invoke("Die", 0.6f);
-            OnDeath();
-        }
-    }
+    
   
     protected virtual void OnDeath() { }
     public void Die()
