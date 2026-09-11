@@ -1,4 +1,6 @@
+using JetBrains.Annotations;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -27,68 +29,92 @@ public class Movement : MonoBehaviour
 
     [Header("Sprites")]
 
+    [SerializeField] private TextMeshProUGUI textDiamonds;
     [SerializeField] private TextMeshProUGUI textPotions;
     [SerializeField] private Image healt;
 
     [Header("Movement")]
     private float horizontal;
-    [SerializeField] private int _speed=4;
-    public int speed {get => _speed; set=> _speed = value;}
+    [SerializeField] private int _speed = 4;
+    public int speed { get => _speed; set => _speed = value; }
     [SerializeField] private int jumpForce;
-    [SerializeField] private int _damage=25;
-    public int damage {get=> _damage; set=> _damage = value;}
-    [SerializeField] private float _maxHealth=100f;
-    public float maxHealth {get=> _maxHealth; set=> _maxHealth = value;}
+    [SerializeField] private int _damage = 25;
+    public int damage { get => _damage; set => _damage = value; }
+    [SerializeField] private float _maxHealth = 100f;
+    public float maxHealth { get => _maxHealth; set => _maxHealth = value; }
     [SerializeField] private int Diamonds = 0;
-    public int _diamonds {get => Diamonds; set => Diamonds = value;}
-    
+    public int _diamonds { get => Diamonds; set => Diamonds = value; }
+
     [Header("Layers")]
     [SerializeField] private LayerMask floor;
     [SerializeField] private LayerMask enemy;
-    
+
     private bool jump;
     private bool alive = true;
     public float timeAttacks = 0.3f;
-    private float cooldownAttack= 0f;
-    
-    protected int _healtPotions;
-    public int healtPotions { get=> _healtPotions; set=> _healtPotions=value; }
+    private float cooldownAttack = 0f;
+
+    protected int _healthPotions;
+    public int healtPotions { get => _healthPotions; set => _healthPotions = value; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
+
     void Start()
     {
-        
+
         //Spawn
         GameObject spawn = GameObject.FindWithTag("SpawnPoint");
-        if(spawn != null)
+        if (spawn != null)
         {
-            transform.position=spawn.transform.position;
-          
+            transform.position = spawn.transform.position;
+
         }
-        anim= GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        sprite= GetComponent<SpriteRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
         if (GameManager.Instance != null)
         {
             _diamonds = GameManager.Instance.diamonds;
             healtPotions = GameManager.Instance.healthPotions;
             maxHealth = GameManager.Instance.savedHealth;
             _speed = GameManager.Instance.savedSpeed;
-            
+
         }
+        UpdateUI();//Actualizar sprites para cada escena 
+
     }
-    public void SaveStatsToManager()
+
+         public void SaveStatsToManager()
+         {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.diamonds = _diamonds;
+                GameManager.Instance.healthPotions = healtPotions;
+                GameManager.Instance.savedHealth = maxHealth;
+                GameManager.Instance.savedSpeed = speed;
+                GameManager.Instance.savedDamage = damage;
+            }
+         }
+
+    private void UpdateUI()
     {
-        if (GameManager.Instance != null)
+        if (healt != null)
         {
-            GameManager.Instance.diamonds = _diamonds;
-            GameManager.Instance.healthPotions = healtPotions;
-            GameManager.Instance.savedHealth = maxHealth;
-            GameManager.Instance.savedSpeed = speed;
-            GameManager.Instance.savedDamage = damage;
+            healt.fillAmount = _maxHealth / 100f;
         }
+
+        if (textPotions != null)
+        {
+            textPotions.text=healtPotions.ToString();
+        }
+
+        if (textDiamonds != null)
+        {
+            textDiamonds.text = _diamonds.ToString();
+        }
+
     }
+        
 
     // Update is called once per frame
     void Update()

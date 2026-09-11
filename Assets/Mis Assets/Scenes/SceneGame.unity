@@ -4277,7 +4277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4346289890953935882, guid: 1d3a780b4504c8149a38416ae5cace98, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6590730071052387110, guid: 1d3a780b4504c8149a38416ae5cace98, type: 3}
       propertyPath: m_LocalPosition.x
@@ -317152,7 +317152,7 @@ PrefabInstance:
     - target: {fileID: 7619800020048816668, guid: 9a546ac479eecec4ea3baca27eab9bf2, type: 3}
       propertyPath: textDiamonds
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1046398077}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
