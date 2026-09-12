@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using TMPro;
@@ -12,7 +13,8 @@ using UnityEngine.Video;
 
 public class Movement : MonoBehaviour
 {
-
+    
+    public event Action<float> OnDamage;
     [Header("Canvas Store")]
 
     [SerializeField] private GameObject PanelBuy;
@@ -24,26 +26,30 @@ public class Movement : MonoBehaviour
     [SerializeField] private GameObject ePromptUI;
     [Header("Components Pj")]
     private Rigidbody2D rb;
+    public Rigidbody2D RB { get => rb; set => rb = value; }
     private Animator anim;
+    public Animator Anim { get => Anim; set => Anim = value; }
     private SpriteRenderer sprite;
 
     [Header("Sprites")]
-
     [SerializeField] private TextMeshProUGUI textDiamonds;
     [SerializeField] private TextMeshProUGUI textPotions;
-    [SerializeField] private Image healt;
+    [SerializeField] private Image healtBar;
 
     [Header("Movement")]
     private float horizontal;
-    [SerializeField] private int _speed = 4;
-    public int speed { get => _speed; set => _speed = value; }
+    [SerializeField] private float _speed = 4f;
+    public float speed { get => _speed; set => _speed = value; }
     [SerializeField] private int jumpForce;
     [SerializeField] private int _damage = 25;
     public int damage { get => _damage; set => _damage = value; }
-    [SerializeField] private float _maxHealth = 100f;
-    public float maxHealth { get => _maxHealth; set => _maxHealth = value; }
-    [SerializeField] private int Diamonds = 0;
-    public int _diamonds { get => Diamonds; set => Diamonds = value; }
+    [SerializeField] private float _Health = 100f;
+    public float Health { get => _Health; set => _Health = value; }
+
+    [SerializeField] private float _MaxHealth = 100f;
+    public float MaxHealth { get=>_MaxHealth; set => _MaxHealth = value;}
+    [SerializeField] private float Diamonds = 0;
+    public float _diamonds { get => Diamonds; set => Diamonds = value; }
 
     [Header("Layers")]
     [SerializeField] private LayerMask floor;
@@ -51,11 +57,12 @@ public class Movement : MonoBehaviour
 
     private bool jump;
     private bool alive = true;
+    public bool Alive{ get => alive; set => alive = value; }
     public float timeAttacks = 0.3f;
     private float cooldownAttack = 0f;
 
-    protected int _healthPotions;
-    public int healtPotions { get => _healthPotions; set => _healthPotions = value; }
+    protected float _healthPotions;
+    public float healtPotions { get => _healthPotions; set => _healthPotions = value; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -69,19 +76,22 @@ public class Movement : MonoBehaviour
             transform.position = spawn.transform.position;
 
         }
+        
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         if (GameManager.Instance != null)
         {
             _diamonds = GameManager.Instance.diamonds;
+            damage = GameManager.Instance.savedDamage;
             healtPotions = GameManager.Instance.healthPotions;
-            maxHealth = GameManager.Instance.savedHealth;
+            Health = GameManager.Instance.savedHealth;
+            MaxHealth = GameManager.Instance.maxHealt;
             _speed = GameManager.Instance.savedSpeed;
-
+            UpdateUI();
         }
-        UpdateUI();//Actualizar sprites para cada escena 
-
+        
+        
     }
 
          public void SaveStatsToManager()
@@ -90,34 +100,32 @@ public class Movement : MonoBehaviour
             {
                 GameManager.Instance.diamonds = _diamonds;
                 GameManager.Instance.healthPotions = healtPotions;
-                GameManager.Instance.savedHealth = maxHealth;
+                GameManager.Instance.savedHealth = Health;
+                GameManager.Instance.maxHealt = MaxHealth;
                 GameManager.Instance.savedSpeed = speed;
                 GameManager.Instance.savedDamage = damage;
             }
          }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
-        if (healt != null)
-        {
-            healt.fillAmount = _maxHealth / 100f;
-        }
-
         if (textPotions != null)
         {
-            textPotions.text=healtPotions.ToString();
+            textPotions.text = healtPotions.ToString();
         }
-
+        if (healtBar != null)
+        {
+            healtBar.fillAmount = Health / MaxHealth;
+        }
         if (textDiamonds != null)
         {
             textDiamonds.text = _diamonds.ToString();
         }
-
     }
-        
 
-    // Update is called once per frame
-    void Update()
+
+// Update is called once per frame
+void Update()
     {
         if (cooldownAttack > 0)
         {
@@ -160,8 +168,8 @@ public class Movement : MonoBehaviour
         }
         if (healtPotions>0 && Input.GetKeyDown(KeyCode.K))
         {
-            _maxHealth += 30;
-            healt.fillAmount = _maxHealth / 100f;
+            _Health += 30;
+            healtBar.fillAmount = _Health / _MaxHealth;
             healtPotions--;
             textPotions.text = healtPotions.ToString();
         }
@@ -233,29 +241,30 @@ public class Movement : MonoBehaviour
 
     public void TakeDamage(int Damage)
     {
-        _maxHealth -= Damage;
-        healt.fillAmount = _maxHealth / 100;
-        if (_maxHealth <= 0)
-        { 
-            Death(1.5f);
+        _Health -= Damage;
+        OnDamage.Invoke(_Health);
+        if (_Health <= 0)
+        {
+            Invoke("Death",0);
         }
     }
-    public void Death(float time)
-    {
+
+
+    public void Death()
+    { 
         alive = false;
         rb.linearVelocity = Vector2.zero;
         anim.SetBool("Death", true);
-        Invoke("Derrota", time);
+        Invoke("Derrota", 1.5f);
     }
     public void Derrota()
     {
         SceneManager.LoadScene("SceneDead");
     }
-    
 
 
-    
-   public GameObject GetPanelBuy()
+
+    public GameObject GetPanelBuy()
     {
         return PanelBuy;
     }

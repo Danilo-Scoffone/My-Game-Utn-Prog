@@ -1785,6 +1785,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa5bd71016c751a408617bb4480376a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Singleton
+--- !u!114 &718435661 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7619800020048816668, guid: 9a546ac479eecec4ea3baca27eab9bf2, type: 3}
+  m_PrefabInstance: {fileID: 7718081097767102378}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60872319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f090168a4a1fa53469ae08511181321b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Movement
+--- !u!114 &718435665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60872319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2459adee702d2284aa767141bc36d99f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  healthBar: {fileID: 1259404038}
+  movement: {fileID: 718435661}
+--- !u!114 &718435666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60872319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c33b7ea9218504fb06649123b62755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Death
+  movement: {fileID: 718435661}
 --- !u!224 &725554388 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8236493101629951136, guid: 482fa749904d8784ebbd95a7ab6f8955, type: 3}
@@ -2491,8 +2529,10 @@ MonoBehaviour:
   diamonds: 0
   healthPotions: 0
   savedHealth: 100
+  maxHealt: 100
   savedSpeed: 4
   savedDamage: 25
+  scene: 0
 --- !u!4 &1275716294
 Transform:
   m_ObjectHideFlags: 0
@@ -4277,7 +4317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4346289890953935882, guid: 1d3a780b4504c8149a38416ae5cace98, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6590730071052387110, guid: 1d3a780b4504c8149a38416ae5cace98, type: 3}
       propertyPath: m_LocalPosition.x
@@ -317146,6 +317186,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7619800020048816668, guid: 9a546ac479eecec4ea3baca27eab9bf2, type: 3}
+      propertyPath: healtBar
+      value: 
+      objectReference: {fileID: 1259404038}
+    - target: {fileID: 7619800020048816668, guid: 9a546ac479eecec4ea3baca27eab9bf2, type: 3}
       propertyPath: textPotions
       value: 
       objectReference: {fileID: 1409864276}
@@ -317160,6 +317204,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1287278487261944351, guid: 9a546ac479eecec4ea3baca27eab9bf2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 718435659}
+    - targetCorrespondingSourceObject: {fileID: 1287278487261944351, guid: 9a546ac479eecec4ea3baca27eab9bf2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 718435666}
+    - targetCorrespondingSourceObject: {fileID: 1287278487261944351, guid: 9a546ac479eecec4ea3baca27eab9bf2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 718435665}
   m_SourcePrefab: {fileID: 100100000, guid: 9a546ac479eecec4ea3baca27eab9bf2, type: 3}
 --- !u!66 &8056268048329446732
 CompositeCollider2D:

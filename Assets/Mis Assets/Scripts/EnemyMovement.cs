@@ -18,7 +18,7 @@ public class EnemyMovement : MonoBehaviour
     
     [Header("Estadísticas de Combate")]
     public int maxHealth = 100;
-    protected int currentHealth;
+    protected float currentHealth;
     protected bool alive = true;
     [SerializeField] private int damageSkeleton;
     public float timeAttacks = 0.6f; 

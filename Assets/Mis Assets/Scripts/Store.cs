@@ -1,5 +1,6 @@
 using UnityEngine;
-using System.Collections.Generic; //Para usar diccionario 
+using System.Collections.Generic;
+using Unity.Mathematics; //Para usar diccionario 
 public class Store : MonoBehaviour
 {
     
@@ -48,15 +49,15 @@ public class Store : MonoBehaviour
                 switch (ItemName) //vemos q item selecciono 
                 {
                     case "PowerUpSword":
-                        playerMovement.damage = Mathf.RoundToInt(playerMovement.damage * 1.25f);
+                        playerMovement.damage =Mathf.RoundToInt(playerMovement.damage * 1.25f);
                         
                         break;
                     case "PowerUpHealth":
-                        playerMovement.maxHealth = Mathf.RoundToInt(playerMovement.maxHealth * 1.50f);
+                        playerMovement.MaxHealth =(playerMovement.MaxHealth * 1.50f);
                        
                         break;
                     case "PowerUpSpeed":
-                        playerMovement.speed = Mathf.RoundToInt(playerMovement.speed * 1.50f);
+                        playerMovement.speed =(playerMovement.speed * 1.50f);
                         break;
                 }
                 

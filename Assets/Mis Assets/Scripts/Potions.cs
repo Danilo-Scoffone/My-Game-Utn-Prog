@@ -1,20 +1,19 @@
 using TMPro;
 using UnityEngine;
 
-public class Potions : MonoBehaviour, ITakeObject
+public class Potions : Collectible
 {
     
     [SerializeField] private TextMeshProUGUI textPotions;
-    public void TakeObject()
+    protected override void OnCollect(Movement player)
     {
-        Movement playermovement = FindFirstObjectByType<Movement>();
-        if (playermovement != null) {
-
-            playermovement.healtPotions++;
-            textPotions.text = playermovement.healtPotions.ToString();
-            Destroy(gameObject);
-            
-        }
         
+        if (player != null)
+        {
+            player.healtPotions++;
+            textPotions.text = player.healtPotions.ToString();
+            
+
+        }
     }
 }

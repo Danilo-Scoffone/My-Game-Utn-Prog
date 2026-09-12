@@ -17,7 +17,7 @@ public class Stats : MonoBehaviour
     void Update()
     {
         Movement playerMovement = FindFirstObjectByType<Movement>();// Buscamos al jugador en la escena
-        textMaxHealth.text = playerMovement.maxHealth.ToString();
+        textMaxHealth.text = playerMovement.MaxHealth.ToString();
         textDamage.text = playerMovement.damage.ToString();
         textSpeed.text = playerMovement.speed.ToString();
     }

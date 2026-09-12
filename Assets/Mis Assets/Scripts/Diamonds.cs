@@ -1,33 +1,24 @@
 using TMPro;
 using UnityEngine;
 
-public class Diamont : MonoBehaviour, ITakeObject
+public class Diamont : Collectible
 {
     [SerializeField] private TextMeshProUGUI textDiamonds;
 
-    public void TakeObject()
+    protected override void OnCollect(Movement player)
     {
-        Movement playermovement = FindFirstObjectByType<Movement>();
+        player._diamonds++;
 
-        if (playermovement != null)
+        // 2. Buscamos el texto de UI en el Canvas por su Tag
+        GameObject textObj = GameObject.FindWithTag("TextDiamonds");
+        if (textObj != null)
         {
-            
-            playermovement._diamonds++;
-
-            // 2. Buscamos el texto de UI en el Canvas por su Tag
-            GameObject textObj = GameObject.FindWithTag("TextDiamonds");
-            if (textObj != null)
+            TextMeshProUGUI textDiamonds = textObj.GetComponent<TextMeshProUGUI>();
+            if (textDiamonds != null)
             {
-                TextMeshProUGUI textDiamonds = textObj.GetComponent<TextMeshProUGUI>();
-                if (textDiamonds != null)
-                {
-                    textDiamonds.text = playermovement._diamonds.ToString();
-                }
+                textDiamonds.text = player._diamonds.ToString();
             }
         }
-
-        
-        Destroy(gameObject);
     }
 }
 
