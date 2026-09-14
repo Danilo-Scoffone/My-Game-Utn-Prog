@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.Mathematics; //Para usar diccionario 
+
 public class Store : MonoBehaviour
 {
     
@@ -60,7 +60,7 @@ public class Store : MonoBehaviour
                         playerMovement.speed =(playerMovement.speed * 1.50f);
                         break;
                 }
-                
+                playerMovement.UpdateUI();
             }
             else
             {

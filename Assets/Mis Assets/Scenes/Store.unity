@@ -56120,6 +56120,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 831583082}
     - target: {fileID: 7619800020048816668, guid: 9a546ac479eecec4ea3baca27eab9bf2, type: 3}
+      propertyPath: healtBar
+      value: 
+      objectReference: {fileID: 359495686}
+    - target: {fileID: 7619800020048816668, guid: 9a546ac479eecec4ea3baca27eab9bf2, type: 3}
       propertyPath: ePromptUI
       value: 
       objectReference: {fileID: 1229122823}

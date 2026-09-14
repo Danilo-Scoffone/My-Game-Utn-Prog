@@ -1,12 +1,12 @@
+
 using UnityEngine;
-using UnityEditor.SearchService;
-using System.Collections.Generic;
-using UnityEngine.Rendering; //Para usar diccionario 
+
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    
+
     // Variables que transportamos entre escenas
     public float diamonds;
     public float healthPotions;
@@ -32,4 +32,6 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    
 }

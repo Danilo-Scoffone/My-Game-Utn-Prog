@@ -1,15 +1,13 @@
-using JetBrains.Annotations;
+
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+
 using TMPro;
-using Unity.Mathematics;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.InputSystem.Processors;
+
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Video;
+
 
 public class Movement : MonoBehaviour
 {
@@ -90,7 +88,7 @@ public class Movement : MonoBehaviour
             _speed = GameManager.Instance.savedSpeed;
             UpdateUI();
         }
-        
+
         
     }
 
@@ -124,8 +122,8 @@ public class Movement : MonoBehaviour
     }
 
 
-// Update is called once per frame
-void Update()
+    // Update is called once per frame
+    void Update()
     {
         if (cooldownAttack > 0)
         {
