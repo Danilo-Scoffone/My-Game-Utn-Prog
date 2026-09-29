@@ -33,7 +33,7 @@ https://github.com/user-attachments/assets/b8e29280-d75b-4d39-b8a0-b220a057d25e
 
 ### Probar la Demo
 Podés jugar la versión ejecutable directamente desde el navegador o descargando la build:
-👉 *(Próximamente disponible en itch.io)*.
+👉 https://danilo-scoffone.itch.io/deep-crypt-update-prog2
 
 ### Ejecutar desde Unity (Para Desarrolladores)
 1. Cloná este repositorio:
