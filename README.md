@@ -23,7 +23,7 @@ https://github.com/user-attachments/assets/b8e29280-d75b-4d39-b8a0-b220a057d25e
   * Lógica de salud, daño y control del personaje.
   * Sistema de cámaras con Cinemachine.
   * UI personalizada.
-  * Herencia para distintos enemys.
+  * Herencia para distintos enemigos.
   * Interfaces.
   * Singleton.
 
